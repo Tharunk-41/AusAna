@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.css";
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
+import Navbar from "../Contents/Navbar";
 
 const Header = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -21,20 +24,44 @@ const Header = () => {
     window.location.reload();
   };
 
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <div className={styles.main_container}>
-      <nav className={styles.navbar}>
-        <h1>Austere Analytics</h1>
-        {token && (
-          <div className={styles.user_info}>
-            <h2>Welcome, {name}</h2>
-            <button className={styles.white_btn} onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        )}
-      </nav>
-    </div>
+    <>
+      <AppBar position="static">
+        <Toolbar style={{ justifyContent: "space-between", backgroundColor: "#54C1DF" ,marginBottom:"1px"}}>
+          <Typography variant="h6">Austere Analytics</Typography>
+          {token && (
+            <div>
+              <Button
+                startIcon={<AccountCircle />}
+                aria-controls="menu"
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
+                color="inherit"
+              >
+                {name}
+              </Button>
+              <Menu
+                id="menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+      {token && <Navbar />}
+    </>
   );
 };
 

@@ -1,0 +1,27 @@
+/* Navbar.css */
+.elevated-appbar {
+    background-color: #54C1DF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .centered-tabs {
+    margin: 0 auto;
+  }
+  
+  /* Style for selected tab */
+  .MuiTabs-flexContainer .MuiTab-root.Mui-selected {
+    background-color: #F5901C;
+    border-bottom: 4px solid #0729a8;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+  }
+  
+  /* Dynamic scaling */
+  @media (max-width: 600px) {
+    .centered-tabs {
+      transform: scale(0.8);
+    }
+  }
+  
