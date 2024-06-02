@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, Button, Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
-import Navbar from "../Contents/Navbar";
 
 const Header = () => {
   const [name, setName] = useState("");
@@ -33,7 +32,6 @@ const Header = () => {
   };
 
   return (
-    <>
       <AppBar position="static">
         <Toolbar style={{ justifyContent: "space-between", backgroundColor: "#54C1DF" ,marginBottom:"1px"}}>
           <Typography variant="h6">Austere Analytics</Typography>
@@ -60,8 +58,6 @@ const Header = () => {
           )}
         </Toolbar>
       </AppBar>
-      {token && <Navbar />}
-    </>
   );
 };
 
