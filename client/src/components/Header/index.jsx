@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Typography, Button, Menu, MenuItem } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, Box } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 
 const Header = () => {
@@ -32,32 +32,40 @@ const Header = () => {
   };
 
   return (
-      <AppBar position="static">
-        <Toolbar style={{ justifyContent: "space-between", backgroundColor: "#54C1DF" ,marginBottom:"1px"}}>
-          <Typography variant="h6">Austere Analytics</Typography>
-          {token && (
-            <div>
-              <Button
-                startIcon={<AccountCircle />}
-                aria-controls="menu"
-                aria-haspopup="true"
-                onClick={handleMenuOpen}
-                color="inherit"
-              >
-                {name}
-              </Button>
-              <Menu
-                id="menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+    <AppBar position="static">
+      <Toolbar style={{ justifyContent: "space-between", backgroundColor: "white" }}>
+          <Box
+            component="img"
+            src="/logo.png"
+            alt="Austere Analytics Logo"
+            sx={{
+              height: 50,
+            }}
+          />
+        {token && (
+          <div style={{ border: '1px solid black' }}>
+            <Button
+              startIcon={<AccountCircle />}
+              aria-controls="menu"
+              aria-haspopup="true"
+              onClick={handleMenuOpen}
+              color="inherit"
+              sx={{ backgroundColor: 'white', color: '#54C1DF' }}
+            >
+              {name}
+            </Button>
+            <Menu
+              id="menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </div>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 

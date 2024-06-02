@@ -11,8 +11,8 @@
   /* Style for selected tab */
   .MuiTabs-flexContainer .MuiTab-root.Mui-selected {
     background-color: #F5901C;
-    border-bottom: 4px solid #0729a8;
-    color: #fff;
+    border-bottom: 4px solid black;
+    color: black;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
