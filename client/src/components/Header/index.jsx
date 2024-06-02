@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Menu, MenuItem, Box } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 
 const Header = () => {
