@@ -1,15 +1,14 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { AppBar, Tabs, Tab, Box } from '@mui/material';
 import './Navbar.css';
 
-// Dynamic imports for the tab content
 const Profiles = React.lazy(() => import('./Profiles/Profiles'));
 const Home = React.lazy(() => import('./Home/Home'));
+const Events = React.lazy(() => import('./Events/Events'));
 
 /*
 const Organizations = React.lazy(() => import('./Organizations/Organizations'));
 const Interactions = React.lazy(() => import('./Interactions/Interactions'));
-const Events = React.lazy(() => import('./Events/Events'));
 const Calendar = React.lazy(() => import('./Calendar/Calendar'));
 const Plans = React.lazy(() => import('./Plans/Plans'));
 const MarketAccess = React.lazy(() => import('./MarketAccess/MarketAccess'));
@@ -18,23 +17,36 @@ const Reports = React.lazy(() => import('./Reports/Reports'));
 */
 
 function Navbar() {
-    const [value, setValue] = useState(-1);
+    const [value, setValue] = useState(() => {
+        const savedValue = localStorage.getItem('selectedTab');
+        return savedValue !== null ? parseInt(savedValue, 10) : -1;
+    });
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        localStorage.setItem('selectedTab', newValue);
     };
+
+    useEffect(() => {
+        const savedValue = localStorage.getItem('selectedTab');
+        if (savedValue !== null) {
+            setValue(parseInt(savedValue, 10));
+        }
+    }, []);
 
     return (
         <div>
-            <AppBar position="static" style={{ boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.5)", backgroundColor: "#54C1DF" }}>
+            <AppBar position="static" className="elevated-appbar">
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     aria-label="navbar tabs"
                     className="centered-tabs"
+                    variant="scrollable"
+                    scrollButtons="auto"
                     TabIndicatorProps={{
                         style: {
-                            display: 'none' // Hides the default tab indicator
+                            display: 'none' 
                         }
                     }}
                 >
@@ -53,10 +65,10 @@ function Navbar() {
                 <Suspense fallback={<div>Loading...</div>}>
                     {value === -1 && <Home />}
                     {value === 0 && <Profiles />}
+                    {value === 3 && <Events />}
                     {/*
           {value === 1 && <Organizations />}
           {value === 2 && <Interactions />}
-          {value === 3 && <Events />}
           {value === 4 && <Calendar />}
           {value === 5 && <Plans />}
           {value === 6 && <MarketAccess />}

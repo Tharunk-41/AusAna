@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import Header from "../../Header/index"
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
@@ -31,6 +32,7 @@ const Login = () => {
 	};
 
 	return (<div>
+		<Header />
 		<div className={styles.login_container}>
 			<div className={styles.login_form_container}>
 				<div className={styles.left}>

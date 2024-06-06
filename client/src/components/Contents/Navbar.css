@@ -1,27 +1,32 @@
-/* Navbar.css */
 .elevated-appbar {
-    background-color: #54C1DF;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .centered-tabs {
-    margin: 0 auto;
-  }
-  
-  /* Style for selected tab */
-  .MuiTabs-flexContainer .MuiTab-root.Mui-selected {
-    background-color: #F5901C;
-    border-bottom: 4px solid black;
-    color: black;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  background-color: #54C1DF !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) ;
+  max-width: 100vw;
+  overflow-x: auto; /* Ensure the AppBar can scroll */
+}
 
-  }
-  
-  /* Dynamic scaling */
-  @media (max-width: 600px) {
-    .centered-tabs {
+.centered-tabs {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Style for selected tab */
+.MuiTabs-flexContainer .MuiTab-root.Mui-selected {
+  background-color: #F5901C;
+  border-bottom: 4px solid grey;
+  color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Dynamic scaling */
+@media (max-width: 600px) {
+  .centered-tabs {
       transform: scale(0.8);
-    }
   }
-  
+}
+
+.navbar-container {
+  overflow-x: auto; /* Ensure the container can scroll */
+  white-space: nowrap; /* Prevent wrapping */
+}

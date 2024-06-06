@@ -1,0 +1,44 @@
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.container {
+  width: 70vw;
+  margin: 0 auto;
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.sticky-header th {
+  position: sticky;
+  top: 0;
+  background:#54C1DF;
+  z-index: 1;
+  font-weight: bold;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid #bcb8b8;
+  padding: 8px;
+}
+
+.table-row {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.table-row:hover {
+  background-color: #eae7e7;
+}
+
+.table-row.selected {
+  background-color: #e0e0e0;
+}

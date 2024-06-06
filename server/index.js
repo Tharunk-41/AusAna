@@ -5,7 +5,8 @@ const cors = require("cors");
 const { connectToMongoDB, connectToMySQL } = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
-const publicationRoutes = require("./routes/publicationsTop"); // Import the new route
+const publicationRoutes = require("./routes/publicationsTop"); 
+const eventRoutes = require("./routes/eventslist");
 
 // database connections
 connectToMongoDB();
@@ -27,7 +28,8 @@ const setupRoutes = () => {
   // routes
   app.use("/api/users", userRoutes);
   app.use("/api/auth", authRoutes);
-  app.use("/api/publications", publicationRoutes(mysqlConnection)); // Use the new route
+  app.use("/api/publications", publicationRoutes(mysqlConnection));
+  app.use("/api/eventlist", eventRoutes(mysqlConnection)); 
 };
 
 const port = 8080;

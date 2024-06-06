@@ -20,6 +20,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    localStorage.clear();
     window.location.reload();
   };
 
@@ -34,14 +35,14 @@ const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar style={{ justifyContent: "space-between", backgroundColor: "white" }}>
-          <Box
-            component="img"
-            src="/logo.png"
-            alt="Austere Analytics Logo"
-            sx={{
-              height: 50,
-            }}
-          />
+        <Box
+          component="img"
+          src="/logo.png"
+          alt="Austere Analytics Logo"
+          sx={{
+            height: 50,
+          }}
+        />
         {token && (
           <div style={{ border: '1px solid black' }}>
             <Button
