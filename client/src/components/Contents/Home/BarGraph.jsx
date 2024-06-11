@@ -69,7 +69,7 @@ const BarGraph = () => {
   }, []);
 
   return (
-    <Paper style={{ padding: 16 }}>
+    <Paper style={{ padding: 16 , height: '50vh', width: '40vw'}}>
       <Typography variant="h6" gutterBottom>
         Top Publication Topics
       </Typography>
