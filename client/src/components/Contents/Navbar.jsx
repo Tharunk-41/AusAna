@@ -5,9 +5,9 @@ import './Navbar.css';
 const Profiles = React.lazy(() => import('./Profiles/Profiles'));
 const Home = React.lazy(() => import('./Home/Home'));
 const Events = React.lazy(() => import('./Events/Events'));
+const Organizations = React.lazy(() => import('./Organizations/Organizations'));
 
 /*
-const Organizations = React.lazy(() => import('./Organizations/Organizations'));
 const Interactions = React.lazy(() => import('./Interactions/Interactions'));
 const Calendar = React.lazy(() => import('./Calendar/Calendar'));
 const Plans = React.lazy(() => import('./Plans/Plans'));
@@ -46,7 +46,7 @@ function Navbar() {
                     scrollButtons="auto"
                     TabIndicatorProps={{
                         style: {
-                            display: 'none' 
+                            display: 'none'
                         }
                     }}
                 >
@@ -66,8 +66,8 @@ function Navbar() {
                     {value === -1 && <Home />}
                     {value === 0 && <Profiles />}
                     {value === 3 && <Events />}
+                    {value === 1 && <Organizations />}
                     {/*
-          {value === 1 && <Organizations />}
           {value === 2 && <Interactions />}
           {value === 4 && <Calendar />}
           {value === 5 && <Plans />}

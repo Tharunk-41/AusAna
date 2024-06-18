@@ -1,0 +1,39 @@
+.sidebar {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 20vw;
+  min-width: 200px;
+  height: 75vh;
+  margin-left:0px;
+}
+
+.header {
+  margin-bottom: 16px;
+  color: #F5901C;
+  font-weight: bold;
+}
+
+.filters {
+  margin-top: 16px;
+}
+
+.formControl {
+  margin-top: 16px;
+}
+
+.scrollableList {
+  max-height: auto;
+  overflow-y: auto;
+}
+
+.sectionTitle {
+  margin-bottom: 16px;
+  color: #F5901C;
+  font-weight: bold;
+}
+@media (max-width: 600px) 
+{
+  .sidebar{
+  }
+}

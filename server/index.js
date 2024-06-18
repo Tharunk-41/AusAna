@@ -7,6 +7,8 @@ const authRoutes = require("./routes/auth");
 const publicationRoutes = require("./routes/publicationsTop"); 
 const eventRoutes = require("./routes/eventslist");
 const profRoutes = require("./routes/profiles");
+const orgRoutes = require("./routes/organizationlist");
+
 
 const app = express();
 app.use(express.json());
@@ -23,6 +25,7 @@ const setupRoutes = () => {
   app.use("/api/publications", publicationRoutes(mysqlConnection));
   app.use("/api/eventlist", eventRoutes(mysqlConnection)); 
   app.use("/api", profRoutes(mysqlConnection));
+  app.use("/api/organizationlist", orgRoutes(mysqlConnection));
 };
 
 connectToMySQL()

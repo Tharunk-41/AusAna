@@ -25,9 +25,9 @@ const Events = () => {
 
   return (
     <div className="Events">
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex",overflow:"auto" }}>
         {selectedEvent ? (
-          <Box display="flex" flexDirection="column" alignItems="flex-start">
+          <Box display="flex"  alignItems="flex-start" >
             <Box display="flex" alignItems="center" mb={2}>
               <Button
                 variant="outlined"
