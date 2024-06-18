@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the back arrow icon
 import {
   TextField,
   FormControl,
@@ -7,6 +8,7 @@ import {
   Box,
   Typography,
   Paper,
+  Button,
 } from '@mui/material';
 import './sidebar.css';
 
@@ -94,9 +96,17 @@ const Sidebar = ({ onFilterChange }) => {
     onFilterChange({ ...filters, [filter]: value });
   };
 
+  const handleBackHome = () => {
+    localStorage.removeItem('selectedTab');
+    window.location.reload(); // Reload the page to navigate to the home screen
+  };
+
   return (
     <Paper className="sidebare" elevation={3}>
-      <Typography variant="h5" className="header" sx={{fontWeight:"bold"}}>
+      <Button onClick={handleBackHome} className="back-homee" startIcon={<ArrowBackIcon />} style={{ color: '#54C1DF' }}>
+        Back Home
+      </Button>
+      <Typography variant="h5" className="header" sx={{ fontWeight: "bold" }}>
         Filters
       </Typography>
       <TextField
@@ -118,10 +128,10 @@ const Sidebar = ({ onFilterChange }) => {
         variant="outlined"
       />
       <Box className="filters">
-        <Typography variant="h6" className="sectionTitle" sx={{fontWeight:"bold"}}>
+        <Typography variant="h6" className="sectionTitle" sx={{ fontWeight: "bold" }}>
           Refine By
         </Typography>
-        <FormControl fullWidth className="formControl" sx={{marginTop:'16px'}}>
+        <FormControl fullWidth className="formControl" sx={{ marginTop: '16px' }}>
           <Autocomplete
             multiple
             options={options.eventTypes}
@@ -151,7 +161,7 @@ const Sidebar = ({ onFilterChange }) => {
           />
         </FormControl>
 
-        <FormControl fullWidth className="formControl" sx={{marginTop:'16px'}}>
+        <FormControl fullWidth className="formControl" sx={{ marginTop: '16px' }}>
           <Autocomplete
             multiple
             options={options.participants}
@@ -181,7 +191,7 @@ const Sidebar = ({ onFilterChange }) => {
           />
         </FormControl>
 
-        <FormControl fullWidth className="formControl" sx={{marginTop:'16px'}}>
+        <FormControl fullWidth className="formControl" sx={{ marginTop: '16px' }}>
           <Autocomplete
             multiple
             options={options.sponsors}

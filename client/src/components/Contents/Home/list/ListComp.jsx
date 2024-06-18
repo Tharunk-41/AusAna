@@ -52,7 +52,7 @@ const DataList = ({ specialization }) => {
               src={item.image_link}
               alt={item['KOL Name']}
               className="data-avatar"
-              onError={(e) => { e.target.onerror = null; e.target.src = 'placeholder-image-url'; }} // Replace 'placeholder-image-url' with the actual URL of a placeholder image
+              onError={(e) => { e.target.onerror = null; e.target.src = '/blank_profile.png'; }}
             />
             <Box className="data-details">
               <Typography variant="h5" className="kol-name">{item['KOL Name']}</Typography>

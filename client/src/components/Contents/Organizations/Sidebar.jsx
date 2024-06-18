@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the back arrow icon
 import {
   TextField,
   FormControl,
@@ -7,6 +8,7 @@ import {
   Box,
   Typography,
   Paper,
+  Button,
 } from '@mui/material';
 import './Sidebar.css';
 
@@ -73,8 +75,16 @@ const Sidebar = ({ onFilterChange, onPageReset }) => {
     onPageReset();
   };
 
+  const handleBackHome = () => {
+    localStorage.removeItem('selectedTab');
+    window.location.reload(); // Reload the page to navigate to the home screen
+  };
+
   return (
     <Paper className="sidebaro" elevation={3}>
+      <Button onClick={handleBackHome} className="back-homeo" startIcon={<ArrowBackIcon />} style={{ color: '#54C1DF' }}>
+        Back Home
+      </Button>
       <Typography variant="h5" className="header" sx={{ fontWeight: 'bold' }}>
         Filters
       </Typography>
