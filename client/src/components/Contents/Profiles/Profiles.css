@@ -1,0 +1,16 @@
+.profiles-container {
+  display: flex;
+  max-width: 100vw;
+  overflow-x:auto;
+}
+
+
+.content-column {
+  min-width: 500px;
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+

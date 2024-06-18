@@ -74,7 +74,7 @@ const Sidebar = ({ onFilterChange, onPageReset }) => {
   };
 
   return (
-    <Paper className="sidebar" elevation={3}>
+    <Paper className="sidebaro" elevation={3}>
       <Typography variant="h5" className="header" sx={{ fontWeight: 'bold' }}>
         Filters
       </Typography>

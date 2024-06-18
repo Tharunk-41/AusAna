@@ -6,8 +6,9 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const publicationRoutes = require("./routes/publicationsTop"); 
 const eventRoutes = require("./routes/eventslist");
-const profRoutes = require("./routes/profiles");
+const profRoutes = require("./routes/profile");
 const orgRoutes = require("./routes/organizationlist");
+const profileRoutes = require('./routes/profiles'); // Include profiles route
 
 
 const app = express();
@@ -23,8 +24,9 @@ const setupRoutes = () => {
   app.use("/api/users", userRoutes);
   app.use("/api/auth", authRoutes);
   app.use("/api/publications", publicationRoutes(mysqlConnection));
+  app.use("/api", profileRoutes(mysqlConnection)); // Pass mysqlConnection to profileRoutes
   app.use("/api/eventlist", eventRoutes(mysqlConnection)); 
-  app.use("/api", profRoutes(mysqlConnection));
+  app.use("/api/home", profRoutes(mysqlConnection));
   app.use("/api/organizationlist", orgRoutes(mysqlConnection));
 };
 

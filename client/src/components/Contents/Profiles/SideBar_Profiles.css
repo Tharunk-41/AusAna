@@ -1,0 +1,71 @@
+.sidebar {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 20vw;
+  min-width: 200px;
+  height: 75vh;
+  margin-left:0px;
+
+}
+
+.sidebar-heading {
+  margin-top: 10px;
+  margin-bottom: 14px;
+  color: #F5901C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-input {
+  margin-top: 6px;
+}
+
+.refine-by-container {
+  max-height: calc(100vh - 200px); /* Adjust according to your layout */
+  height: 300px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.refine-by {
+  padding-right: 8px; /* Add padding to accommodate scrollbar width */
+}
+
+.clear-all {
+  text-transform: none; /* Prevent text from being transformed to uppercase */
+  font-weight: bold; /* Make the text bold */
+  color: #54C1DF; /* Set the text color */
+  font-size: 15px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chip-scroll-container {
+  max-height: 60px; /* Adjust height as needed */
+  overflow-x: auto; /* Enable vertical scrolling */
+  display: flex;
+  max-width:15rem;
+  /*flex-direction: column;  Stack chips vertically */
+}
+.chip-item {
+  margin-bottom: 3px; /* Add space between chips */
+}
+.back-home {
+  text-transform: none; /* Prevent text from being transformed to uppercase */
+  font-weight: bold; /* Make the text bold */
+  color: #54C1DF; /* Set the text color */
+  font-size: 15px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  align-self: flex-start; /* Align the button to the start (left) */
+  margin-bottom: 10px; /* Add some margin below the button */
+}
+@media (max-width: 900px) {
+  .sidebar-heading{
+    display: flex;
+    
+  }
+  .back-home {
+    width: 60%;
+    font-size: 75%;
+  }
+}

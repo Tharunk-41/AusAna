@@ -1,9 +1,11 @@
-.sidebar {
-    padding: 16px;
-    background-color: #fff;
-    border-radius: 8px;
-    max-width: 20vw;
-    min-width: 200px;
+.sidebare {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 20vw;
+  min-width: 200px;
+  height: 75vh;
+  margin-left:0px
   }
   
   .header {

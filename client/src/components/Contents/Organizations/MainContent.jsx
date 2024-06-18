@@ -103,10 +103,15 @@ const MainContent = ({ filters }) => {
                 count={totalPages}
                 page={page}
                 onChange={handlePageChange}
-                variant="outlined"
-                shape="rounded"
-                size="large"
+                color="primary"
+                className="pagination"
+                sx={{
+                    '.Mui-selected': {
+                        backgroundColor: '#F5901C !important',
+                    },
+                }}
               />
+
             </Box>
           </>
         )}

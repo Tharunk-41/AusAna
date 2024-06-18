@@ -1,0 +1,82 @@
+.profile-list-container {
+  width: 100%;
+  max-height: calc(100vh - 150px); /* Adjust to fit within the view height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profiles-cards {
+  width: 100%;
+  overflow-y: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap; /* Ensure cards wrap to new line when needed */
+  gap: 20px; /* Add spacing between cards */
+  
+}
+
+.profile-card {
+  width: calc(100% - 20px); /* Adjust width to have two columns with spacing */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.profile-card:hover {
+  background-color: rgba(245, 144, 28, 0.15);
+  /*background-color: rgba(84, 193, 223, 0.2); /* Transparent color on hover --BLUE*/
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.profile-image {
+  /*RECTANGULR IMAGE
+  /*width: 80%;
+  height: 150px; /* Set the height to desired size */
+  /*object-fit: contain; /* Ensure the entire image is visible */
+  /*border: 3px solid #ccc; /* Add a bold border */
+  /*border-radius: 10px; /* Apply border radius */
+  /*margin:4px;*/
+  width: 10vw;
+  height: 10vw;
+  object-fit: contain;
+  border-radius: 50%; /* Make the image circular */
+  border: 2px solid #ccc; /* Add a border */
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1); /* Add a box-shadow for the 3D effect */
+  margin:15px;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.profile-info {
+  color: #555;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .profile-card {
+    width: calc(100% - 20px); /* Adjust width for single column layout */
+  }
+  /*.profile-image {
+    width: calc(100% - 20px); /* Adjust size for smaller screens */
+   /* height: calc(100% - 20px); /* Adjust size for smaller screens */
+/*}*/
+  .profile-cardo{
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+  }
+}

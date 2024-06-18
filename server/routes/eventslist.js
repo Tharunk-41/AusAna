@@ -3,31 +3,52 @@ const router = express.Router();
 
 module.exports = (connection) => {
   router.get('/events', (req, res) => {
-    const { page, pageSize, keyword, name, eventType, participant, sponsor } = req.query;
+    const { page = 1, pageSize = 10, keyword, name, eventType, participant, sponsor } = req.query;
 
     let query = 'SELECT * FROM conference_engagements WHERE 1=1';
-    if (keyword) query += ` AND (Event_Name LIKE '%${keyword}%' OR Description LIKE '%${keyword}%')`;
-    if (name) query += ` AND (Event_Name  LIKE '%${name}%')`;
+    let countQuery = 'SELECT COUNT(*) as count FROM conference_engagements WHERE 1=1';
+
+    if (keyword) {
+      query += ` AND (Event_Name LIKE '%${keyword}%' OR Description LIKE '%${keyword}%')`;
+      countQuery += ` AND (Event_Name LIKE '%${keyword}%' OR Description LIKE '%${keyword}%')`;
+    }
+    if (name) {
+      query += ` AND (Event_Name  LIKE '%${name}%')`;
+      countQuery += ` AND (Event_Name  LIKE '%${name}%')`;
+    }
     if (eventType) {
       const eventTypes = eventType.split(',').map(e => `Event_Type LIKE '%${e.replace(/'/g, "''")}%'`).join(' OR ');
       query += ` AND (${eventTypes})`;
+      countQuery += ` AND (${eventTypes})`;
     }
     if (participant) {
       const participants = participant.split(',').map(p => `\`KOL Name\` LIKE '%${p.replace(/'/g, "''")}%'`).join(' OR ');
       query += ` AND (${participants})`;
+      countQuery += ` AND (${participants})`;
     }
     if (sponsor) {
       const sponsors = sponsor.split(',').map(s => `Sponsor_Name LIKE '%${s.replace(/'/g, "''")}%'`).join(' OR ');
       query += ` AND (${sponsors})`;
+      countQuery += ` AND (${sponsors})`;
     }
 
     const limit = parseInt(pageSize);
     const offset = (parseInt(page) - 1) * limit;
     query += ` LIMIT ${limit} OFFSET ${offset}`;
 
-    connection.query(query, (error, results) => {
-      if (error) throw error;
-      res.json(results);
+    connection.query(countQuery, (countError, countResults) => {
+      if (countError) throw countError;
+
+      const totalItems = countResults[0].count;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      connection.query(query, (error, results) => {
+        if (error) throw error;
+        res.json({
+          results,
+          totalPages,
+        });
+      });
     });
   });
 

@@ -11,7 +11,7 @@ const DataList = ({ specialization }) => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/data?table=bio&specialization=${specialization}&limit=10&page=${page}`);
+      const response = await fetch(`http://localhost:8080/api/home/data?table=bio&specialization=${specialization}&limit=10&page=${page}`);
       const result = await response.json();
       setData(prevData => [...prevData, ...result]);
       setHasMore(result.length > 0);
@@ -77,7 +77,7 @@ function ListComp() {
   useEffect(() => {
     const fetchSpecializations = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/specializations');
+        const response = await fetch('http://localhost:8080/api/home/specializations');
         const result = await response.json();
         setSpecializations(result);
         setSelectedSpecialization(result[0]); // Set the first option as default
