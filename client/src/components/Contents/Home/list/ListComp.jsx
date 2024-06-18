@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Box, Typography, CircularProgress, Card, CardContent, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Box, Typography, CircularProgress, Card, CardContent, Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
 import './styles.css';
 
 const DataList = ({ specialization }) => {
@@ -7,7 +7,6 @@ const DataList = ({ specialization }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const observer = useRef();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -32,16 +31,9 @@ const DataList = ({ specialization }) => {
     fetchData();
   }, [fetchData]);
 
-  const lastDataElementRef = useCallback(node => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prevPage => prevPage + 1);
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, [loading, hasMore]);
+  const loadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
 
   if (loading && page === 1) {
     return <CircularProgress />;
@@ -71,8 +63,8 @@ const DataList = ({ specialization }) => {
           </CardContent>
         </Card>
       ))}
-      <div ref={lastDataElementRef}></div>
       {loading && <CircularProgress />}
+      {!loading && hasMore && <Button onClick={loadMore}>Load More</Button>}
       {!loading && !hasMore && <Typography>No more data</Typography>}
     </Box>
   );

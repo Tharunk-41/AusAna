@@ -39,76 +39,87 @@ module.exports = (pool) => {
     const offset = (page - 1) * limit;
 
     let query = `SELECT Organization_Type, Organization_Name, City, State, Country, COUNT(*) AS Profile_Count 
-               FROM professional_activities 
-               WHERE 1=1`;
+                 FROM professional_activities 
+                 WHERE 1=1`;
     let queryParams = [];
 
     if (name) {
-        query += ` AND \`Organization_Name\` LIKE ?`;
-        queryParams.push(`%${name}%`);
+      query += ` AND \`Organization_Name\` LIKE ?`;
+      queryParams.push(`%${name}%`);
     }
     if (region) {
-        query += ` AND \`Country\` LIKE ?`;
-        queryParams.push(`%${region}%`);
+      query += ` AND \`Country\` LIKE ?`;
+      queryParams.push(`%${region}%`);
     }
 
     if (organizationType && organizationType.length > 0) {
-        query += ` AND Organization_Type IN (?)`;
-        queryParams.push(organizationType.split(','));
+      query += ` AND Organization_Type IN (?)`;
+      queryParams.push(organizationType.split(','));
     }
 
     if (location) {
-        query += ` AND (City LIKE ? OR State LIKE ? OR Country LIKE ?)`;
-        queryParams.push(`%${location}%`, `%${location}%`, `%${location}%`);
+      const locations = location.split(',').map(loc => loc.trim());
+      const conditions = locations.map(loc => `(City LIKE ? OR State LIKE ? OR Country LIKE ?)`).join(' OR ');
+      query += ` AND (${conditions})`;
+      locations.forEach(loc => {
+        queryParams.push(`%${loc}%`, `%${loc}%`, `%${loc}%`);
+      });
     }
 
     // Grouping and ordering
     query += ` GROUP BY Organization_Type, Organization_Name, City, State, Country`;
 
+    // Add limit and offset for pagination
     query += ` LIMIT ? OFFSET ?`;
     queryParams.push(parseInt(limit), parseInt(offset));
 
+    // Execute the main query
     pool.query(query, queryParams, (error, results) => {
-        if (error) {
-            console.error('Error fetching professional activities', error);
-            res.status(500).send('Internal Server Error');
-        } else {
-            // Count distinct entries with the same filters
-            let countQuery = `SELECT COUNT(DISTINCT Organization_Type, Organization_Name, City, State, Country) AS total 
-                              FROM professional_activities 
-                              WHERE 1=1`;
-            let countParams = [];
+      if (error) {
+        console.error('Error fetching professional activities', error);
+        res.status(500).send('Internal Server Error');
+      } else {
+        // Count distinct entries with the same filters
+        let countQuery = `SELECT COUNT(DISTINCT Organization_Type, Organization_Name, City, State, Country) AS total 
+                          FROM professional_activities 
+                          WHERE 1=1`;
+        let countParams = [];
 
-            if (name) {
-                countQuery += ` AND \`Organization_Name\` LIKE ?`;
-                countParams.push(`%${name}%`);
-            }
-            if (region) {
-                countQuery += ` AND \`Country\` LIKE ?`;
-                countParams.push(`%${region}%`);
-            }
-
-            if (organizationType && organizationType.length > 0) {
-                countQuery += ` AND Organization_Type IN (?)`;
-                countParams.push(organizationType.split(','));
-            }
-
-            if (location) {
-                countQuery += ` AND (City LIKE ? OR State LIKE ? OR Country LIKE ?)`;
-                countParams.push(`%${location}%`, `%{location}%`, `%${location}%`);
-            }
-
-            pool.query(countQuery, countParams, (countError, countResults) => {
-                if (countError) {
-                    console.error('Error counting professional activities', countError);
-                    res.status(500).send('Internal Server Error');
-                } else {
-                    const total = countResults[0].total;
-                    const totalPages = Math.ceil(total / limit);
-                    res.json({ results, totalPages, currentPage: parseInt(page) });
-                }
-            });
+        if (name) {
+          countQuery += ` AND \`Organization_Name\` LIKE ?`;
+          countParams.push(`%${name}%`);
         }
+        if (region) {
+          countQuery += ` AND \`Country\` LIKE ?`;
+          countParams.push(`%${region}%`);
+        }
+
+        if (organizationType && organizationType.length > 0) {
+          countQuery += ` AND Organization_Type IN (?)`;
+          countParams.push(organizationType.split(','));
+        }
+
+        if (location) {
+          const locations = location.split(',').map(loc => loc.trim());
+          const conditions = locations.map(loc => `(City LIKE ? OR State LIKE ? OR Country LIKE ?)`).join(' OR ');
+          countQuery += ` AND (${conditions})`;
+          locations.forEach(loc => {
+            countParams.push(`%${loc}%`, `%${loc}%`, `%${loc}%`);
+          });
+        }
+
+        // Execute the count query
+        pool.query(countQuery, countParams, (countError, countResults) => {
+          if (countError) {
+            console.error('Error counting professional activities', countError);
+            res.status(500).send('Internal Server Error');
+          } else {
+            const total = countResults[0].total;
+            const totalPages = Math.ceil(total / limit);
+            res.json({ results, totalPages, currentPage: parseInt(page) });
+          }
+        });
+      }
     });
   });
 
