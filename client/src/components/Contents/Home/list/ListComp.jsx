@@ -11,7 +11,7 @@ const DataList = ({ specialization }) => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/home/data?table=bio&specialization=${specialization}&limit=10&page=${page}`);
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/home/data?table=bio&specialization=${specialization}&limit=10&page=${page}`);
       const result = await response.json();
       setData(prevData => [...prevData, ...result]);
       setHasMore(result.length > 0);
