@@ -35,7 +35,7 @@ const Sidebar = ({ onFilterChange, onPageReset }) => {
       setLoading((prevLoading) => ({ ...prevLoading, organizationTypes: true }));
 
       try {
-        const organizationTypesResponse = await fetch('http://localhost:8080/api/organizationlist/eventlist/options/organizationTypes');
+        const organizationTypesResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/organizationlist/eventlist/options/organizationTypes`);
         if (!organizationTypesResponse.ok) {
           throw new Error('Failed to fetch organization types');
         }
@@ -48,7 +48,7 @@ const Sidebar = ({ onFilterChange, onPageReset }) => {
 
         setLoading((prevLoading) => ({ ...prevLoading, organizationTypes: false }));
 
-        const regionsResponse = await fetch('http://localhost:8080/api/organizationlist/eventlist/options/region');
+        const regionsResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/organizationlist/eventlist/options/region`);
         if (!regionsResponse.ok) {
           throw new Error('Failed to fetch regions');
         }

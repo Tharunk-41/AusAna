@@ -7,7 +7,7 @@ let mysqlConnection;
 const connectToMongoDB = () => {
   const connectionParams = {};
   try {
-    mongoose.connect(process.env.DB, connectionParams);
+    mongoose.connect(process.env.MONGODB_URI, connectionParams);
     console.log("Connected to MongoDB successfully");
   } catch (error) {
     console.log(error);
@@ -18,10 +18,10 @@ const connectToMongoDB = () => {
 const connectToMySQL = () => {
   return new Promise((resolve, reject) => {
     mysqlConnection = mysql.createConnection({
-      host: '127.0.0.1',
-      user: 'root',
-      password: 'tharun41',
-      database: 'austere'
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE
     });
 
     mysqlConnection.connect((err) => {

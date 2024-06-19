@@ -17,7 +17,7 @@ const Profiles = () => {
         // Function to fetch profiles
         const fetchProfiles = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/profiles', {
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/profiles`, {
                     params: {
                         keyword,
                         name,

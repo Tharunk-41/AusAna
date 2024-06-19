@@ -11,7 +11,7 @@ const SideBarProfiles = ({ onKeywordChange, onNameChange, onFilterChange }) => {
     useEffect(() => {
         const fetchOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/filters');
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/filters`);
                 setOptions(response.data);
             } catch (error) {
                 console.error('Error fetching filter options:', error);

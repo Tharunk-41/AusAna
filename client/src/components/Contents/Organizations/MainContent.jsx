@@ -44,7 +44,7 @@ const MainContent = ({ filters }) => {
       .map((key) => `${key}=${filters[key]}`)
       .join('&');
 
-    const response = await fetch(`http://localhost:8080/api/organizationlist/professional_activities?page=${page}&limit=${itemsPerPage}&${queryString}`);
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/organizationlist/professional_activities?page=${page}&limit=${itemsPerPage}&${queryString}`);
     const result = await response.json();
 
     setData(result.results);

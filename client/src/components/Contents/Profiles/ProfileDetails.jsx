@@ -13,7 +13,7 @@ const ProfileDetails = ({ onBack }) => {
     useEffect(() => {
         const selectedProfileId = localStorage.getItem('selectedProfileId');
         if (selectedProfileId) {
-            fetch(`http://localhost:8080/api/profile/${selectedProfileId}`)
+            fetch(`${process.env.REACT_APP_SERVER_URL}/api/profile/${selectedProfileId}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

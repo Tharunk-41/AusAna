@@ -50,9 +50,9 @@ const Sidebar = ({ onFilterChange }) => {
       setLoading({ eventTypes: true, participants: true, sponsors: true });
 
       const [eventTypes, participants, sponsors] = await Promise.all([
-        fetch('http://localhost:8080/api/eventlist/options/eventTypes').then(res => res.json()),
-        fetch('http://localhost:8080/api/eventlist/options/participants').then(res => res.json()),
-        fetch('http://localhost:8080/api/eventlist/options/sponsors').then(res => res.json()),
+        fetch(`${process.env.REACT_APP_SERVER_URL}/api/eventlist/options/eventTypes`).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_SERVER_URL}/api/eventlist/options/participants`).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_SERVER_URL}/api/eventlist/options/sponsors`).then(res => res.json()),
       ]);
 
       setOptions({ eventTypes, participants, sponsors });

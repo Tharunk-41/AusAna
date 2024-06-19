@@ -43,7 +43,7 @@ const EventList = ({ filters, page, setPage, pageSize, onRowClick }) => {
       setIsLoading(true);
       const params = new URLSearchParams({ ...filters, page, pageSize });
       try {
-        const response = await fetch(`http://localhost:8080/api/eventlist/events?${params.toString()}`);
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/eventlist/events?${params.toString()}`);
         const data = await response.json();
         setEvents(data.results || []);  // Ensure events is an array
         setTotalPages(data.totalPages || 1);  // Ensure totalPages is a number
