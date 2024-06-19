@@ -10,7 +10,7 @@ const BarGraph = () => {
 
   const fetchTopPublicationTopics = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/publications/topPublicationTopics');
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/publications/topPublicationTopics`);
       if (!response.ok) {
         throw new Error('Failed to fetch top publication topics');
       }

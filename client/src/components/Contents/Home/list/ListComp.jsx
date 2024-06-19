@@ -77,7 +77,7 @@ function ListComp() {
   useEffect(() => {
     const fetchSpecializations = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/home/specializations');
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/home/specializations`);
         const result = await response.json();
         setSpecializations(result);
         setSelectedSpecialization(result[0]); // Set the first option as default
