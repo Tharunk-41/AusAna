@@ -39,7 +39,8 @@ connectToMySQL()
     console.error('Failed to connect to MySQL:', err);
   });
 
-const port = 8080;
-app.listen(port, () => {
-  console.log(`Listening on port ${port}...`);
-});
+  const port = process.env.PORT || 8080;
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}...`);
+  });
+  
