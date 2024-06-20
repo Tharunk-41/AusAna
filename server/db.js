@@ -17,13 +17,8 @@ const connectToMongoDB = () => {
 
 const connectToMySQL = () => {
   return new Promise((resolve, reject) => {
-    mysqlConnection = mysql.createConnection({
-      host: process.env.MYSQL_HOST,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-      port:process.env.MYSQL_PORT
-    });
+    urlDB=process.env.MYSQL_PRIVATE_URL
+    mysqlConnection = mysql.createConnection(urlDB);
 
     mysqlConnection.connect((err) => {
       if (err) {
